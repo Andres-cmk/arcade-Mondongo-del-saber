@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+    <script src="nave.js"></script>
+    <script src="enemigo.js"></script>
+    <script src="bala.js"></script>
+    <script src="balaEnemiga.js"></script>
+    <script src="sketch.js"></script>
+</body>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    height: 100vh;           /* Usa el 100% de la altura de la pantalla */
+    background-color: #111;  /* Un color oscuro para que resalte el juego */
+    overflow: hidden;        /* Evita barras de desplazamiento */
+
+    background-image: url('assets/background_image.png');
+    background-size: cover;  /* Asegura que la imagen cubra todo el fondo */
+    background-position: center; /* Centra la imagen de fondo */
+    background-repeat: no-repeat;
+  }
+
+  canvas {
+    border: 2px solid #555;  /* Opcional: un borde para darle marco al juego */
+    box-shadow: 0 0 20px rgba(0,0,0,0.5); /* Sombra para profundidad */
+  }
+</style>
+</html>
