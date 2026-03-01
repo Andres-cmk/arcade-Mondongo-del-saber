@@ -33,12 +33,12 @@ let snakes = [];
 
 // jugabilidad
 let time;
+let maxTime = 30; // 30 segundos para completar
+let timeCounter = 0; // Contador de frames
 let lifes;
-let level;
 let occupiedSpaces = [false, false, false, false, false]; // Espacios ocupados
 let score = 0;
 let highScore = 0;
-let levelUpScore = 1000; // Puntos necesarios para subir de nivel
 
 
 function windowResized() {
@@ -107,6 +107,8 @@ function setup() {
   // Inicializar vidas y puntos
   lifes = 3;
   score = 0;
+  time = maxTime; // Inicializar tiempo
+  timeCounter = 0;
   
   // objetos del juego.
   frog = new Frog(gridSize, jump, spriters, occupiedSpaces);
@@ -186,6 +188,27 @@ function setup() {
 function draw() {
   background(0);
 
+  // Actualizar temporizador
+  timeCounter++;
+  if (timeCounter >= 60) { 
+    time--;
+    timeCounter = 0;
+  }
+  
+  // Verificar si se acabó el tiempo
+  if (time <= 0) {
+    lifes--;
+    score = Math.max(0, score - 50);
+    frog.reset();
+    time = maxTime; // Resetear tiempo
+    timeCounter = 0;
+    if (lifes <= 0) {
+      lifes = 3;
+      score = 0;
+      frog.occupiedSpaces = [false, false, false, false, false];
+    }
+  }
+
   
   fill(255, 190, 11);
   // Así que vamos a dibujar líneas divisorias en las filas 7, 8, 9 y 10.
@@ -245,6 +268,8 @@ function draw() {
           frog.occupiedSpaces[i] = true;
           // Sumar puntos por llegar a un espacio
           score += 100;
+          // Bonus por tiempo restante (10 puntos por segundo)
+          score += time * 10;
           // Actualizar highScore si es necesario
           if (score > highScore) {
             highScore = score;
@@ -252,6 +277,8 @@ function draw() {
         }
         // Resetear la posición de la rana al inicio
         frog.reset();
+        time = maxTime; // Resetear tiempo
+        timeCounter = 0;
         break;
       }
     }
@@ -264,8 +291,8 @@ function draw() {
       lifes--;
       // Restar puntos por perder vida (no bajar de 0)
       score = Math.max(0, score - 50);
-      frog.reset();
-      if (lifes <= 0) {
+      frog.reset();      time = maxTime; // Resetear tiempo
+      timeCounter = 0;      if (lifes <= 0) {
         // Game over: reiniciar
         lifes = 3;
         score = 0;
@@ -282,8 +309,8 @@ function draw() {
       lifes--;
       // Restar puntos por perder vida (no bajar de 0)
       score = Math.max(0, score - 50);
-      frog.reset();
-      if (lifes <= 0) {
+      frog.reset();      time = maxTime; // Resetear tiempo
+      timeCounter = 0;      if (lifes <= 0) {
         // Game over: reiniciar
         lifes = 3;
         score = 0;
@@ -330,6 +357,8 @@ function draw() {
         lifes--;
         score = Math.max(0, score - 50);
         frog.reset();
+        time = maxTime; // Resetear tiempo
+        timeCounter = 0;
         if (lifes <= 0) {
           lifes = 3;
           score = 0;
@@ -342,6 +371,8 @@ function draw() {
       lifes--;
       score = Math.max(0, score - 50);
       frog.reset();
+      time = maxTime; // Resetear tiempo
+      timeCounter = 0;
       if (lifes <= 0) {
         lifes = 3;
         score = 0;
@@ -385,9 +416,41 @@ function draw() {
     image(lifesImg, 20 + i * 40, 50, 30, 30);
   }
   
+
+  textAlign(LEFT, BOTTOM);
+  textSize(16);
+  fill(255, 255, 255); // Blanco para mejor visibilidad
+  text('Tiempo: ' + time + 's', 20, height - 45);
+  
+  // Barra de tiempo (inferior izquierda)
+  let barWidth = 150;
+  let barHeight = 12;
+  let barX = 20;
+  let barY = height - 30;
+  
+  // Fondo de la barra (negro para contraste)
+  fill(0);
+  stroke(255);
+  strokeWeight(2);
+  rect(barX, barY, barWidth, barHeight);
+  
+  // Barra de tiempo actual
+  noStroke();
+  let timePercent = time / maxTime;
+  if (timePercent > 0.5) {
+    fill(0, 255, 255); // Cian brillante
+  } else if (timePercent > 0.25) {
+    fill(255, 165, 0); // Naranja
+  } else {
+    fill(255, 0, 100); // Rosa/Rojo brillante
+  }
+  rect(barX + 2, barY + 2, (barWidth - 4) * timePercent, barHeight - 4);
+  noStroke();
+  
   // Mostrar puntos
   textAlign(RIGHT, TOP);
   textSize(18);
+  fill(255);
   text('Puntos: ' + score, width - 20, 20);
   text('Record: ' + highScore, width - 20, 50);
 
