@@ -271,7 +271,7 @@ function draw() {
         score = 0;
         frog.occupiedSpaces = [false, false, false, false, false];
       }
-      break; // Salir del loop después de detectar colisión
+      break;
     }
   }
   
@@ -289,7 +289,7 @@ function draw() {
         score = 0;
         frog.occupiedSpaces = [false, false, false, false, false];
       }
-      break; // Salir del loop después de detectar colisión
+      break; 
     }
   }
   
@@ -362,6 +362,7 @@ function draw() {
     turtles[i].update();
   }
   
+  // dibujar rana
   frog.draw();
   
   for (let i = 0; i < cars.length; i++){
@@ -379,7 +380,7 @@ function draw() {
   textSize(18);
   textAlign(LEFT, TOP);
   text('Vidas: ' + lifes, 20, 20);
-  // También puedes mostrar las vidas con imágenes
+
   for (let i = 0; i < lifes; i++) {
     image(lifesImg, 20 + i * 40, 50, 30, 30);
   }
