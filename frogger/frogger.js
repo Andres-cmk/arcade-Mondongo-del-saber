@@ -206,7 +206,7 @@ function draw() {
   rect(0, gridSize, width, gridSize * 4);
 
   // los andenes 
-  fill(100, 200, 100); 
+  fill(0, 140, 0); 
   // Andén del medio
   rect(0, gridSize * 5, width, gridSize); 
   rect(0, height - gridSize, width, gridSize);
@@ -376,7 +376,7 @@ function draw() {
   
   // Mostrar vidas
   fill(255);
-  textSize(24);
+  textSize(18);
   textAlign(LEFT, TOP);
   text('Vidas: ' + lifes, 20, 20);
   // También puedes mostrar las vidas con imágenes
@@ -386,6 +386,7 @@ function draw() {
   
   // Mostrar puntos
   textAlign(RIGHT, TOP);
+  textSize(18);
   text('Puntos: ' + score, width - 20, 20);
   text('Record: ' + highScore, width - 20, 50);
 
