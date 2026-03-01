@@ -5,12 +5,14 @@ let gridSize;
 // audio
 let gameAudio;
 let jump;
+let squash;
 
 // frog
 let frog;
 let spriters = {};
 let finalFrogger;
 let lifesImg;
+let frogPlunk;
 
 // cars
 let cars = [];
@@ -19,6 +21,10 @@ let car;
 
 // objetos de agua.
 let spritersWater = {};
+let trunks = [];
+let trunk;
+let turtle;
+let turtles = [];
 
 // snake
 let snakeImg;
@@ -46,6 +52,8 @@ function preload(){
   // audios.
   gameAudio = createAudio("/songs/game.mp3");
   jump = createAudio("/songs/jump.mp3");
+  squash = createAudio("/songs/squash.wav");
+  frogPlunk = createAudio("/songs/plunk.wav");
   
   // spriters frog
   spriters.still = loadImage("/assets/frogge.png");
@@ -56,6 +64,7 @@ function preload(){
   
   // objetos de Agua.
   spritersWater.trunk = loadImage("/assets/tronco.png");
+  turtle = loadImage("/assets/turtle.png");
   
   // imagen final
   finalFrogger = loadImage("/assets/final_frogger.png");
@@ -103,6 +112,8 @@ function setup() {
   frog = new Frog(gridSize, jump, spriters, occupiedSpaces);
   car = new Car(spritersCars.car, 0, gridSize * 6, gridSize, gridSize, -3);
   snake = new Snake(gridSize, snakeImg, width/2, gridSize * 5, gridSize * 2, gridSize, 2);
+  trunk = new Trunk(spritersWater.trunk, 0, gridSize * 2, gridSize * 2, gridSize, 2);
+  turtle = new Turtle(turtle, 0, gridSize * 1, gridSize * 3, gridSize, -2);
 
   
   // config de los carros.
@@ -135,6 +146,38 @@ function setup() {
          s.snakeW, 
          gridSize, 
          s.speed));
+    }
+  }
+
+  // config de los troncos.
+  for (let config of trunk.rows) {
+    let separacion = width / config.count;
+    for (let i = 0; i < config.count; i++) {
+      let x = i * separacion;
+      trunks.push(new Trunk(
+        config.img,
+        x,
+        gridSize * config.fila,
+        config.trunkW,
+        gridSize,
+        config.speed
+      ));
+    }
+  }
+
+  // config de las tortugas.
+  for (let config of turtle.rows) {
+    let separacion = width / config.count;
+    for (let i = 0; i < config.count; i++) {
+      let x = i * separacion;
+      turtles.push(new Turtle(
+        config.img,
+        x,
+        gridSize * config.fila,
+        config.turtleW,
+        gridSize,
+        config.speed
+      ));
     }
   }
 
@@ -217,6 +260,7 @@ function draw() {
   // Verificar colisiones con carros
   for (let i = 0; i < cars.length; i++) {
     if (frog.checkCollision(cars[i])) {
+      squash.play();
       lifes--;
       // Restar puntos por perder vida (no bajar de 0)
       score = Math.max(0, score - 50);
@@ -234,6 +278,7 @@ function draw() {
   // Verificar colisiones con serpientes
   for (let i = 0; i < snakes.length; i++) {
     if (frog.checkCollision(snakes[i])) {
+      squash.play();
       lifes--;
       // Restar puntos por perder vida (no bajar de 0)
       score = Math.max(0, score - 50);
@@ -246,6 +291,75 @@ function draw() {
       }
       break; // Salir del loop después de detectar colisión
     }
+  }
+  
+  // Verificar si la rana está en el agua (filas 1-4)
+  let frogRow = Math.floor(frog.pos.y / gridSize);
+  if (frogRow >= 1 && frogRow <= 4) {
+    // La rana está en el agua, verificar si está sobre un tronco o tortuga
+    let onFloatingObject = false;
+    let currentObject = null;
+    
+    // Verificar troncos
+    for (let i = 0; i < trunks.length; i++) {
+      if (frog.checkCollision(trunks[i])) {
+        onFloatingObject = true;
+        currentObject = trunks[i];
+        break;
+      }
+    }
+    
+    // Si no está en un tronco, verificar tortugas
+    if (!onFloatingObject) {
+      for (let i = 0; i < turtles.length; i++) {
+        if (frog.checkCollision(turtles[i])) {
+          onFloatingObject = true;
+          currentObject = turtles[i];
+          break;
+        }
+      }
+    }
+    
+    if (onFloatingObject && currentObject) {
+      // Mover la rana con el objeto flotante
+      frog.pos.x += currentObject.speed;
+      
+      // Si la rana se sale de la pantalla, perder vida
+      if (frog.pos.x < 0 || frog.pos.x + frog.size > width) {
+        frogPlunk.play();
+        lifes--;
+        score = Math.max(0, score - 50);
+        frog.reset();
+        if (lifes <= 0) {
+          lifes = 3;
+          score = 0;
+          frog.occupiedSpaces = [false, false, false, false, false];
+        }
+      }
+    } else {
+      // No está sobre un tronco o tortuga, se ahoga
+      frogPlunk.play();
+      lifes--;
+      score = Math.max(0, score - 50);
+      frog.reset();
+      if (lifes <= 0) {
+        lifes = 3;
+        score = 0;
+        frog.occupiedSpaces = [false, false, false, false, false];
+      }
+    }
+  }
+  
+  // Dibujar troncos
+  for (let i = 0; i < trunks.length; i++){
+    trunks[i].draw();
+    trunks[i].update();
+  }
+  
+  // Dibujar tortugas
+  for (let i = 0; i < turtles.length; i++){
+    turtles[i].draw();
+    turtles[i].update();
   }
   
   frog.draw();
