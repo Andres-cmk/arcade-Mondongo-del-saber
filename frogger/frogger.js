@@ -50,32 +50,32 @@ function windowResized() {
 function preload(){
 
   // audios.
-  gameAudio = createAudio("/songs/game.mp3");
-  jump = createAudio("/songs/jump.mp3");
-  squash = createAudio("/songs/squash.wav");
-  frogPlunk = createAudio("/songs/plunk.wav");
+  gameAudio = createAudio("songs/game.mp3");
+  jump = createAudio("songs/jump.mp3");
+  squash = createAudio("songs/squash.wav");
+  frogPlunk = createAudio("songs/plunk.wav");
   
   // spriters frog
-  spriters.still = loadImage("/assets/frogge.png");
-  spriters.left = loadImage("/assets/frogger_left.png");
-  spriters.right = loadImage("/assets/frogger_right.png");
-  spriters.back = loadImage("/assets/frogger_back.png");
-  lifesImg = loadImage("/assets/lifes.png");
+  spriters.still = loadImage("assets/frogge.png");
+  spriters.left = loadImage("assets/frogger_left.png");
+  spriters.right = loadImage("assets/frogger_right.png");
+  spriters.back = loadImage("assets/frogger_back.png");
+  lifesImg = loadImage("assets/lifes.png");
   
   // objetos de Agua.
-  spritersWater.trunk = loadImage("/assets/tronco.png");
-  turtle = loadImage("/assets/turtle.png");
+  spritersWater.trunk = loadImage("assets/tronco.png");
+  turtle = loadImage("assets/turtle.png");
   
   // imagen final
-  finalFrogger = loadImage("/assets/final_frogger.png");
+  finalFrogger = loadImage("assets/final_frogger.png");
   
   // spriters car
-  spritersCars.lorry = loadImage("/assets/lorry.png");
-  spritersCars.car = loadImage("/assets/car.png");
-  spritersCars.car_right = loadImage("/assets/car_right.png");
+  spritersCars.lorry = loadImage("assets/lorry.png");
+  spritersCars.car = loadImage("assets/car.png");
+  spritersCars.car_right = loadImage("assets/car_right.png");
 
   // spriters snake
-  snakeImg = loadImage("/assets/snake.png");
+  snakeImg = loadImage("assets/snake.png");
   
 }
 
