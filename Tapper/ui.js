@@ -39,7 +39,7 @@ function drawStartScreen() {
   text("Arrow Keys = Move | Space = Throw Beer", width / 2, height - 60);
 }
 
-function drawGameOver() {
+function drawGameOver() {  
   background(0);
   textFont(gameFont);
   fill(255);

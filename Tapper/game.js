@@ -97,6 +97,7 @@ function handleRelease() {
 
 function loseLife() {
   lives--;
+  music.stop(); 
   if (lives <= 0) {
     gameState = "gameover";
   } else {
@@ -113,15 +114,13 @@ function drawClearScreen() {
   textFont(gameFont);
   textAlign(CENTER);
 
-  // Título
   fill(255, 220, 0);
   textSize(42);
-  text("CLEAR ALL CUSTOMERS TO ADVANCE", width / 2, height / 2 - 120);
+  text("clear all customers to advance", width / 2, height / 2 - 120);
 
-  // Fila: imagen cerveza + puntos
-  let bw = beerThrown.width / 2;
-  let bh = beerThrown.height;
-  image(beerThrown, width / 2 - 160, height / 2 - 60, 40, 55, 0, 0, bw, bh);
+  let bw = beerEmpty.width;
+  let bh = beerEmpty.height;
+  image(beerEmpty, width / 2 - 160, height / 2 - 60, 50, 60, 0, 0, bw, bh);
   fill(255);
   textSize(30);
   textAlign(LEFT);
@@ -131,7 +130,7 @@ function drawClearScreen() {
   let cw = customerSprite.width / 4;
   let ch = customerSprite.height / 8;
   // Usa el tipo 0, frame 0
-  image(customerSprite, width / 2 - 160, height / 2 + 20, 45, 55, 0, 0, cw, ch);
+  image(customerSprite, width / 2 - 160, height / 2 + 20, 50, 60, 0, 0, cw, ch);
   text("50 PTS", width / 2 - 100, height / 2 + 55);
 
   textAlign(CENTER);
@@ -147,6 +146,7 @@ function drawClearScreen() {
 
 function drawReadyScreen() {
   screenTimer++;
+  
   background(20, 20, 30);
   textFont(gameFont);
   textAlign(CENTER);
@@ -163,15 +163,16 @@ function drawReadyScreen() {
   }
   let fw = spriteSheet.width / getReadyAnimFrames;
   let fh = spriteSheet.height;
-  image(spriteSheet, width / 2 - 60, height / 2 - 40, 120, 140,
+  image(spriteSheet, width / 2 - 60, height / 2 - 40, 130, 140,
         getReadyAnimFrame * fw, 0, fw, fh);
-
-  // Tras 2 segundos (120 frames) inicia el juego
+        
   if (screenTimer >= 120) {
     screenTimer = 0;
     customers = [];
     beers = [];
     player = new Player();
+    music.loop();   // ← inicia en loop
+    if (music.isLoaded() && !music.isPlaying()) music.loop();
     gameState = "play";
   }
 }

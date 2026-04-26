@@ -65,8 +65,8 @@ class Customer {
     
       // si llega al bartender sin recibir cerveza
       if (this.x * scl >= playerX[this.lane]) {
-        customers.splice(customers.indexOf(this), 1);
         player.triggerScared();
+        customers.splice(customers.indexOf(this), 1);
         loseLife();
         return;
       }
@@ -131,6 +131,7 @@ class Customer {
         emptyGlass.x = this.x;
         emptyGlass.speed = -0.06; // negativo = va hacia la derecha (bartender)
         emptyGlass.isReturn = true;
+        emptyGlass.isEmpty = true
         beers.push(emptyGlass);
         this.state = "walking"; // vuelve a avanzar 
       }

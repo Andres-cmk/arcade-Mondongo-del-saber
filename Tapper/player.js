@@ -19,7 +19,7 @@ class Player {
     // Estado change (cambio de fila)
     this.isChanging = false;     // está en animación de cambio
     this.changeTimer = 0;        // duración del frame de cambio
-    this.changeDuration = 20;    // frames que dura bartender_change antes de moverse
+    this.changeDuration = 10;    // frames que dura bartender_change antes de moverse
     this.pendingLaneDir = 0;     // dirección de fila pendiente (-1 o +1)
     
     // Partículas del cambio de fila
@@ -47,7 +47,7 @@ class Player {
   
   triggerScared() {
   this.state = "scared";
-  this.scaredTimer = 40; // dura 40 frames (~0.67 seg a 60fps)
+  this.scaredTimer = 50; 
   }
   
   updateParticles() {
@@ -89,7 +89,7 @@ class Player {
   }
 
   update() {
-    // --- Movimiento horizontal fluido ---
+    //Movimiento horizontal 
     if (!this.isChanging) {
       if (keyIsDown(LEFT_ARROW)) {
         this.moveHorizontal(1);
@@ -105,7 +105,7 @@ class Player {
       }
     }
   
-    // --- Estado scared ---
+    // Estado scared 
     if (this.state === "scared") {
       this.scaredTimer--;
       if (this.scaredTimer <= 0) {
@@ -117,7 +117,7 @@ class Player {
       return;
     }
   
-    // --- Animación de cambio de fila ---
+    // Animación de cambio de fila
     if (this.isChanging) {
       this.changeTimer++;
       if (this.changeTimer >= this.changeDuration) {
@@ -133,7 +133,7 @@ class Player {
       return;
     }
   
-    // --- Frames normales ---
+    // Frames normales 
     this.frameCounter++;
     if (this.frameCounter >= this.frameDelay) {
       this.frame++;
@@ -177,7 +177,7 @@ class Player {
     let x = playerX[this.lane] - this.hOffset * scl;
     let y = laneY[this.lane];
   
-    // --- Dibuja partículas (se quedan en la fila anterior si ya cambió) ---
+    // Partículas (se quedan en la fila anterior si ya cambió) 
     for (let p of this.particles) {
       if (particles.width > 0) {
         let pw = particles.width / 4;
@@ -187,9 +187,9 @@ class Player {
       }
     }
   
-    // --- Dibuja al bartender según estado ---
+    // Dibuja al bartender según estado
     if (this.state === "scared") {
-      image(bartenderScared, x, y, 115, 115);
+      image(bartenderScared, x+10, y-10, 70, 125);
       return;
     }
   

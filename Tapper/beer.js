@@ -19,6 +19,8 @@ class Beer {
     this.brokenFrames = 4;
     this.brokenFrameWidth = 0; // se calcula al romper
     this.brokenFrameHeight = 0;
+    
+    this.isEmpty = false;       // true si es vaso de retorno vacío
   }
   
 
@@ -72,10 +74,12 @@ class Beer {
       return;
     }
   
-    if (this.isReturn && this.x >= playerX[this.lane] / scl) {
-      beers.splice(beers.indexOf(this), 1);
+    if (this.isReturn && !this.broken && this.x >= playerX[this.lane] / scl) {
+      this.broken = true;
+      this.brokenY = laneY[this.lane] + 15;
+      this.brokenFrameWidth = beerEmptyCaida.width / 4;
+      this.brokenFrameHeight = beerEmptyCaida.height;
       player.triggerScared();
-      loseLife();
       return;
     }
   }
@@ -84,15 +88,19 @@ class Beer {
     if (this.broken) {
       let sx = this.brokenFrame * this.brokenFrameWidth;
       image(
-        cervezaCaida,
+        this.isEmpty ? beerEmptyCaida : cervezaCaida,
         this.x * scl,
         this.brokenY,
-        30,
-        40,
+        30, 40,
         sx, 0,
         this.brokenFrameWidth,
         this.brokenFrameHeight
       );
+      return;
+    }
+    
+    if (this.isEmpty) {
+      image(beerEmpty, this.x * scl, laneY[this.lane] + 15, 30, 40);
       return;
     }
   
@@ -107,6 +115,7 @@ class Beer {
       this.beerFrameWidth,
       this.beerFrameHeight
     );
+    
   }
 }
 
