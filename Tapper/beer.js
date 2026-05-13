@@ -55,7 +55,7 @@ class Beer {
     }
   
     // Llega al borde izquierdo
-    if (this.x <= customerX[this.lane]) {
+    if (!this.isReturn && this.x <= customerX[this.lane]) {
       // ¿Hay algún cliente en esta fila?
       let hasCustomer = customers.some(c => c.lane === this.lane);
   

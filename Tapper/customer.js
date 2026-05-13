@@ -149,7 +149,7 @@ class Customer {
     let drawWidth = 53;
     let drawHeight = 73;
   
-    let offsets = [-8, -12, -12, -14, -15, -15, -18, -20];
+    let offsets = [-6, -8, -12, -13, -13, -15, -18, -20];
     let baseY = laneY[this.lane] + 70;
     let y = baseY - drawHeight + offsets[this.type];
   
@@ -200,7 +200,7 @@ function spawnCustomers() {
   if (random(1) < 0.01 + level * 0.003) {
     let lane = floor(random(0, lanes));
     let inLane = customers.filter(c => c.lane === lane).length;
-    if (inLane < 2) {
+    if (inLane < (score >= 2500 ? 3 : 2)) {
       customers.push(new Customer(lane));
     }
   }

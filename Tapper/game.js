@@ -113,28 +113,28 @@ function loseLife() {
 
 function drawClearScreen() {
   screenTimer++;
-  background(20, 20, 30);
+  background(27, 27, 64);
   textFont(gameFont);
   textAlign(CENTER);
 
-  fill(255, 220, 0);
-  textSize(42);
-  text("clear all customers to advance", width / 2, height / 2 - 120);
+  fill(222, 199, 80);
+  textSize(55);
+  text("CLEAR  ALL  CUSTOMERS  TO  ADVANCE", width / 2, height / 2 - 120);
 
   let bw = beerEmpty.width;
   let bh = beerEmpty.height;
-  image(beerEmpty, width / 2 - 160, height / 2 - 60, 50, 60, 0, 0, bw, bh);
+  image(beerEmpty, width / 2 - 160, height / 2 - 60, 60, 70, 0, 0, bw, bh);
   fill(255);
   textSize(30);
   textAlign(LEFT);
-  text("100 PTS", width / 2 - 100, height / 2 - 30);
+  text("100 PTS", width / 2, height / 2 - 15);
 
   // Fila: imagen cliente + puntos
   let cw = customerSprite.width / 4;
   let ch = customerSprite.height / 8;
   // Usa el tipo 0, frame 0
-  image(customerSprite, width / 2 - 160, height / 2 + 20, 50, 60, 0, 0, cw, ch);
-  text("50 PTS", width / 2 - 100, height / 2 + 55);
+  image(customerSprite, width / 2 - 160, height / 2 + 20, 60, 70, 0, 0, cw, ch);
+  text("50 PTS", width / 2, height / 2 + 70);
 
   textAlign(CENTER);
 
@@ -150,13 +150,13 @@ function drawClearScreen() {
 function drawReadyScreen() {
   screenTimer++;
   
-  background(20, 20, 30);
+  background(27, 27, 64);
   textFont(gameFont);
   textAlign(CENTER);
 
-  fill(255, 100, 100);
-  textSize(52);
-  text("GET READY TO SERVE", width / 2, height / 2 - 100);
+  fill(222, 199, 80);
+  textSize(55);
+  text("GET  READY  TO  SERVE", width / 2, height / 2 - 120);
 
   // Animación idle del bartender
   getReadyAnimTimer++;
@@ -166,7 +166,7 @@ function drawReadyScreen() {
   }
   let fw = spriteSheet.width / getReadyAnimFrames;
   let fh = spriteSheet.height;
-  image(spriteSheet, width / 2 - 60, height / 2 - 40, 130, 140,
+  image(spriteSheet, width / 2 - 90, height / 2 - 40, 170, 170,
         getReadyAnimFrame * fw, 0, fw, fh);
         
   if (screenTimer >= 120) {

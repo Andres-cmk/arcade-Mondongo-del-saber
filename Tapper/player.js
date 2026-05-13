@@ -122,7 +122,7 @@ class Player {
       this.changeTimer++;
       if (this.changeTimer >= this.changeDuration) {
         // Ejecuta el cambio real de fila
-        this.lane = constrain(this.lane + this.pendingLaneDir, 0, lanes - 1);
+        this.lane = (this.lane + this.pendingLaneDir + lanes) % lanes;
         this.hOffset = 0;
         this.isChanging = false;
         this.changeTimer = 0;

@@ -1,14 +1,12 @@
 function drawStartScreen() {
   textFont(gameFont);
-  background(20, 20, 30);
+  background(27, 27, 64);
 
   fill(255);
   textAlign(CENTER);
-  textSize(150);
-  text("Tapper", width / 2, 120);
+  textSize(180);
+  text("Tapper", width / 2, 200);
 
-  textSize(40);
-  text("ARCADE", width / 2, 170);
 
   startAnimTimer++;
   if (startAnimTimer > 12) {
@@ -29,27 +27,34 @@ function drawStartScreen() {
   }
 
   if (blink) {
-    textSize(28);
-    text("PRESS SPACE TO START", width / 2, height - 120);
+    textSize(32);
+    fill(222, 199, 80);
+    text("PRESS  SPACE  TO  START", width / 2, height - 120);
   }
 
-  textFont('Arial');
-  textSize(16);
-  fill(180);
-  text("Arrow Keys = Move | Space = Throw Beer", width / 2, height - 60);
+  textFont('Arial');   
+  textStyle(BOLD);       
+  textSize(14);
+  fill(255);
+  
+  text(
+    "Arrow Keys ← ↑ ↓ → to Move | Hold SPACE to charge the beer, release to throw",
+    width / 2,
+    height - 60
+  );
 }
 
 function drawGameOver() {  
-  background(0);
+  background(27, 27, 64);
   textFont(gameFont);
   fill(255);
   textAlign(CENTER);
 
-  textSize(150);
+  textSize(140);
   text("GAME OVER", width / 2, height / 2 - 40);
 
-  textSize(24);
-  text("Score " + score, width / 2, height / 2);
+  textSize(52);
+  text("SCORE  " + score, width / 2, height / 2 + 40);
 
   blinkTimer++;
   if (blinkTimer > 30) {
@@ -58,7 +63,8 @@ function drawGameOver() {
   }
 
   if (blink) {
-    textSize(28);
+    fill(222, 199, 80);
+    textSize(32);
     text("Press R to restart", width / 2, height - 120);
   }
 }
@@ -76,10 +82,7 @@ function showHUD() {
   noStroke();
   fill(255);
 
-  textSize(16);
-  text("Level " + level, 100, 20);
-  text("Score " + score, 100, 40);
-  text("Lives " + lives, 100, 60);
-
-
+  textSize(25);
+  text("Score   " + score, 150, 60);
+  text("Lives   " + lives, 150, 80);
 }
