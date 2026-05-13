@@ -2,7 +2,7 @@ class Customer {
   constructor(lane) {
     this.lane = lane;
     this.x = customerX[lane];
-    this.speed = 0.05 + level * 0.02;
+    this.speed = 0.03 + level * 0.02;
 
     // tipo aleatorio (fila del sprite)
     this.type = floor(random(0, 8));

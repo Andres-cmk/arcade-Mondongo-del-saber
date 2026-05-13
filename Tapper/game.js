@@ -2,8 +2,8 @@ let scl = 40;
 let player, customers = [], beers = [];
 let lanes = 4, level = 0, score = 0, lives = 3;
 
-let laneY = [115, 255, 395, 535];
-let playerX = [895, 955, 1025, 1090];
+let laneY = [];
+let playerX = [];
 let customerX = [12, 10, 9, 8];
 
 let frameWidth;
@@ -27,7 +27,10 @@ let lifeLostTimer = 0;      // pausa tras perder una vida
 let lifeLostDuration = 90;  // ~1.5 seg de pausa antes de ir a clearScreen
 
 function setupGame() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1540, 700);
+  
+  laneY    = [115, 255, 395, 535];
+  playerX  = [895, 955, 1025, 1090];
 
   player = new Player();
   
