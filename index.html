@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mondongo del Saber - Retro Arcade</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Bienvenido a Mondongo del Saber, la colección definitiva de juegos retro arcade: Space Invaders, Tapper, Frogger y Snowy Sokobear.">
+</head>
+<body class="crt">
+    <div class="scanline"></div>
+    
+    <main class="container">
+        <h1>MONDONGO DEL SABER</h1>
+        
+        <div class="game-grid">
+            <a href="Space_Invaders/index.html" class="game-card" id="game-space-invaders">
+                <img src="assets/space_invaders.png" alt="Icono de Space Invaders">
+                <h2>SPACE INVADERS</h2>
+            </a>
+
+            <a href="Tapper/index.html" class="game-card" id="game-tapper">
+                <img src="assets/tapper.png" alt="Icono de Tapper">
+                <h2>TAPPER</h2>
+            </a>
+
+            <a href="Frogger/index.html" class="game-card" id="game-frogger">
+                <img src="assets/frogger.png" alt="Icono de Frogger">
+                <h2>FROGGER</h2>
+            </a>
+
+            <a href="Snowy_Sokobear/index.html" class="game-card" id="game-sokobear">
+                <img src="assets/sokobear.png" alt="Icono de Snowy Sokobear">
+                <h2>SNOWY SOKOBEAR</h2>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>INSERT COIN TO START • 2026 MONDONGO ENTERTAINMENT</p>
+    </footer>
+
+    <script>
+        // Subtle interaction: play sound on hover if we had one
+        const cards = document.querySelectorAll('.game-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                console.log('Hovering over ' + card.id);
+            });
+        });
+    </script>
+</body>
+</html>
