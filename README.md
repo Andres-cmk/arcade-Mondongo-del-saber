@@ -14,7 +14,7 @@ Colección de minijuegos estilo arcade hechos con **p5.js** (Processing para la 
 ### Paso 0
 
 ```
-git clone 
+ggit clone -b main --single-branch 
 ```
 
 ### Opción A — VS Code + Live Server (recomendado)
