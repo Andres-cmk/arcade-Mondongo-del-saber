@@ -9,7 +9,13 @@ Colección de minijuegos estilo arcade hechos con **p5.js** (Processing para la 
 - **Sharick Yelixa Torres Monroy** — Creadora de **Tapper** — shtorres@unal.edu.co
 - **Yamid Alfonso Gonzalez Torres** — Creador de **Snowy Sokobear** — yagonzalez@unal.edu.co
 
-## 🚀 Cómo ejecutar (para el profe)
+## 🚀 Cómo ejecutar
+
+### Paso 0
+
+```
+git clone 
+```
 
 ### Opción A — VS Code + Live Server (recomendado)
 
