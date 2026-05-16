@@ -4,8 +4,8 @@ Colección de minijuegos estilo arcade hechos con **p5.js** (Processing para la 
 
 ## 👥 Integrantes
 
-- **Andres Felipe Ramirez Montana** — Creador de **Frogger** — andramirezm@unal.edu.co
 - **Diego Steven Pinzon Yossa** — Creador de **Space Invaders** — dpinzony@unal.edu.co
+- **Andres Felipe Ramirez Montana** — Creador de **Frogger** — andramirezm@unal.edu.co
 - **Sharick Yelixa Torres Monroy** — Creadora de **Tapper** — shtorres@unal.edu.co
 - **Yamid Alfonso Gonzalez Torres** — Creador de **Snowy Sokobear** — yagonzalez@unal.edu.co
 
@@ -28,6 +28,20 @@ Colección de minijuegos estilo arcade hechos con **p5.js** (Processing para la 
 
 - Abrir [index.html](index.html) con doble click.
 - Si aparece algún error de recursos (404 / imágenes que no cargan), usa la **Opción A**.
+
+### Opción C — Processing (modo p5.js)
+
+Este proyecto está hecho con **p5.js** (Processing). En **Processing** seguir los siguientes pasos:
+
+1. Instalar **Processing**.
+2. Para iniciar desde el menú principal: abrir [index.html](index.html) en el navegador.
+3. Alternativa (correr un juego desde Processing): abrir la carpeta del juego y ejecutar:
+   - [Frogger/](Frogger/)
+   - [Space_Invaders/](Space_Invaders/)
+   - [Tapper/](Tapper/)
+   - [Snowy_Sokobear/](Snowy_Sokobear/)
+
+Al presionar **Run**, Processing levantará un servidor y abrirá el juego en el navegador.
 
 ## 🗂️ Estructura
 
