@@ -14,7 +14,7 @@ Colección de minijuegos estilo arcade hechos con **p5.js** (Processing para la 
 ### Paso 0
 
 ```
-ggit clone -b main --single-branch https://github.com/Andres-cmk/arcade-Mondongo-del-saber.git
+git clone -b main --single-branch https://github.com/Andres-cmk/arcade-Mondongo-del-saber.git
 ```
 
 ### Opción A — VS Code + Live Server (recomendado)
