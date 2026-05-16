@@ -25,6 +25,12 @@ let spriteCamino;
 let spritePared;
 let spriteBorde;
 
+// Canvas (para resize sin recrear elementos)
+let canvasP5;
+
+// Evitar inputs antes de tener nivel cargado
+let juegoListo = false;
+
 // Variables para movimiento suave
 let drawPlayerX;
 let drawPlayerY;
@@ -73,9 +79,9 @@ function preload() {
   
   spriteOso = loadImage("sprites/oso.png");
   spriteManzana = loadImage("sprites/manzana.png");
-  spriteArbol = loadImage(encodeURI("sprites/árbol.png"));
+  spriteArbol = loadImage("sprites/arbol.png");
   spriteHojas = loadImage("sprites/hojas.png");
-  pantallaFinal = loadImage(encodeURI("sprites/pantalla final.png"));
+  pantallaFinal = loadImage("sprites/pantalla_final.png");
 
   spriteCamino = loadImage("sprites/camino.png");
   spritePared = loadImage("sprites/pared.png");
@@ -166,8 +172,18 @@ function entorno() {
     espacioVertical / gridHeight
   ));
 
+  // Si por algún motivo no hay tamaño válido, no seguimos.
+  if (!cellSize || isNaN(cellSize) || cellSize <= 0) return;
+
   // Crear canvas del tamaño exacto del tablero
-  createCanvas(gridWidth * cellSize, gridHeight * cellSize + 40);
+  const canvasW = gridWidth * cellSize;
+  const canvasH = gridHeight * cellSize + 40;
+
+  if (!canvasP5) {
+    canvasP5 = createCanvas(canvasW, canvasH);
+  } else {
+    resizeCanvas(canvasW, canvasH);
+  }
 
   // Centrar el canvas
   let canvas = document.querySelector('canvas');
@@ -178,6 +194,8 @@ function entorno() {
 }
 
 function cargarNivel() {
+  if (!nivelesData || !nivelesData[opcion - 1]) return;
+
   let nivelOriginal = JSON.parse(JSON.stringify(nivelesData[opcion - 1]));
 
   suelo = [];
@@ -217,6 +235,8 @@ function cargarNivel() {
       }
     }
   }
+
+  juegoListo = true;
 }
 
 // ================= DIBUJO =================
@@ -375,6 +395,8 @@ function draw() {
 // ================= MOVIMIENTO =================
 // El movimiento continuo con teclado se maneja en draw() usando keyIsDown()
 function mousePressed() {
+  if (!juegoListo) return;
+
   // Calcular la dirección desde el jugador hacia el mouse
   let jugadorX = playerX * cellSize + cellSize / 2;
   let jugadorY = playerY * cellSize + cellSize / 2;
@@ -406,6 +428,8 @@ window.addEventListener('mouseup', function() {
 });
 
 function mover(dx, dy) {
+  if (!juegoListo) return;
+
   // Actualizar dirección del oso
   if (dy < 0) direccionOso = 1;      // Arriba
   else if (dy > 0) direccionOso = 0; // Abajo
@@ -467,8 +491,11 @@ function leerCelda(f, c) {
 
 // ================= GANAR =================
 function ganar() {
+  if (!juegoListo || !nivelesData) return;
+
   for (let i = 0; i < gridHeight; i++) {
     for (let j = 0; j < gridWidth; j++) {
+      if (!suelo[i] || typeof suelo[i][j] === 'undefined') return;
       if (suelo[i][j] === ARBOL && objetos[i][j] !== HOJAS) {
         return;
       }
@@ -520,6 +547,7 @@ function botones() {
 
 // ================= RESPONSIVE =================
 function windowResized() {
-  resizeCanvas(gridWidth * cellSize, gridHeight * cellSize + 40);
+  // Evita NaN en el primer resize (antes de `setup()` o antes de tener `cellSize`).
+  if (!nivelesData) return;
   entorno();
 }
